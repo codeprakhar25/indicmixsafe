@@ -105,8 +105,8 @@ def main() -> None:
     axes[0].set_ylabel("Attack Success Rate (%)")
     axes[1].legend(fontsize=9, loc="upper left")
     fig.suptitle(
-        "Figure 1: Judge vs. audited ASR by register — caste signal collapses, "
-        "electoral-misinfo survives",
+        "Judge vs. audited ASR by register "
+        "(caste collapses under audit, electoral misinfo survives)",
         fontsize=11,
     )
     fig.tight_layout()

@@ -33,7 +33,7 @@ def export_drift_cases(df: pd.DataFrame, drift: pd.DataFrame, out_dir: Path) -> 
             )
     out = pd.DataFrame(rows)
     out.to_csv(out_dir / "drift_case_studies.csv", index=False)
-    print(f"Drift cases: {len(drift_only)} seed×model pairs → {out_dir / 'drift_case_studies.csv'}")
+    print(f"Drift cases: {len(drift_only)} seed-model pairs -> {out_dir / 'drift_case_studies.csv'}")
 
 
 def export_human_sample(df: pd.DataFrame, out_dir: Path, n: int = 30) -> None:
@@ -57,7 +57,7 @@ def export_human_sample(df: pd.DataFrame, out_dir: Path, n: int = 30) -> None:
     sample["human_label"] = ""
     sample["human_notes"] = ""
     sample.to_csv(out_dir / "human_validation_sample.csv", index=False)
-    print(f"Human validation sample → {out_dir / 'human_validation_sample.csv'} ({len(sample)} rows)")
+    print(f"Human validation sample -> {out_dir / 'human_validation_sample.csv'} ({len(sample)} rows)")
 
 
 def main() -> None:
@@ -79,7 +79,7 @@ def main() -> None:
     (args.output_dir / "top_drift_examples.json").write_text(
         top.to_json(orient="records", indent=2), encoding="utf-8"
     )
-    print(f"Top drift JSON → {args.output_dir / 'top_drift_examples.json'}")
+    print(f"Top drift JSON -> {args.output_dir / 'top_drift_examples.json'}")
 
 
 if __name__ == "__main__":

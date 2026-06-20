@@ -144,10 +144,10 @@ def main() -> None:
         json.dumps(summary, indent=2), encoding="utf-8"
     )
 
-    print("\n=== ASR by Model × Variant ===")
+    print("\n=== ASR by Model x Variant ===")
     print(tabulate(asr_table, headers="keys", tablefmt="github", showindex=False))
 
-    print("\n=== ASR by Category × Variant (harmful only) ===")
+    print("\n=== ASR by Category x Variant (harmful only) ===")
     print(tabulate(cat_table, headers="keys", tablefmt="github", showindex=False))
 
     print("\n=== Summary ===")

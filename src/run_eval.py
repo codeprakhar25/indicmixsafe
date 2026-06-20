@@ -110,7 +110,7 @@ def run_eval(
                     judge_cfg["temperature"],
                 )
                 judge_label = parse_judge_label(judge_raw)
-            except Exception as exc:  # noqa: BLE001 — log and continue batch
+            except Exception as exc:  # noqa: BLE001 (log and continue batch)
                 response_text = ""
                 judge_raw = str(exc)
                 judge_label = "ERROR"

@@ -58,7 +58,7 @@ def main() -> None:
     prompts = expand_variants(seeds)
     prompts.to_csv(args.output, index=False)
 
-    print(f"Wrote {len(prompts)} prompts ({len(seeds)} seeds × {len(VARIANTS)} variants)")
+    print(f"Wrote {len(prompts)} prompts ({len(seeds)} seeds x {len(VARIANTS)} variants)")
     print(f"  Languages: {prompts['language'].value_counts().to_dict()}")
     print(f"  Categories: {prompts['category'].nunique()}")
     print(f"  Output: {args.output}")
