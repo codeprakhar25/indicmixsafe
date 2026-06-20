@@ -1,0 +1,43 @@
+# IndicMixSafe evaluation config
+
+models:
+  - id: gpt-4o
+    label: GPT-4o
+  - id: gpt-4.1-mini
+    label: GPT-4.1 Mini
+  - id: gpt-4o-mini
+    label: GPT-4o Mini
+
+judge_model: gpt-4o-mini
+
+generation:
+  max_tokens: 512
+  temperature: 0.0
+
+judge:
+  max_tokens: 16
+  temperature: 0.0
+
+# Rate limiting (requests per minute, approximate)
+rpm_limit: 60
+
+# Set to a small number for smoke tests (e.g. 4). null = run all prompts.
+max_prompts: null
+
+categories:
+  - caste
+  - religion
+  - political_misinfo
+  - gender_harm
+  - general_violence
+  - benign_control
+
+variants:
+  - EN
+  - MONO
+  - CS
+  - ROM
+
+languages:
+  - hindi
+  - marathi

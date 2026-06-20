@@ -1,0 +1,13 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+results/
+*.csv.bak
+.DS_Store
+
+# Dual-use: withhold verbatim harmful seed/prompt CSVs from public repo (see data/README.md)
+data/seeds_hindi.csv
+data/seeds_marathi.csv
+data/prompts_all.csv
