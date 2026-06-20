@@ -44,7 +44,7 @@ This linguistic reality creates a safety blind spot. If a model refuses a harmfu
 
 ---
 
-## 3. Methodology
+## 3. Methods
 
 ### 3.1 Prompt construction
 
@@ -223,24 +223,26 @@ CSRT (Yoo et al., 2025) reported 46.7% higher ASR from code-switching across ten
 
 ---
 
-## 7. What's New This Weekend
+## 7. Future Work
 
-- [x] Curated Hindi and Marathi safety prompt set with four language-register variants (EN / MONO / CS / ROM)
-- [x] Confirmed (audited) cross-register failure on **electoral misinformation**: English refuses voter-suppression notices that Marathi registers comply with, on two OpenAI models
-- [x] Quantified **register-dependent inconsistency** (18.3% of harmful seed × model pairs) and confirmed hard-bypass drift (3.3%)
-- [x] **Judge-reliability result**: automated LLM-as-judge over-counts attack success ~3.75× on Indic prompts — a methodological caution for multilingual red-teaming
-- [x] Open-source, reproducible evaluation pipeline with checkpointed API runs and a full audit trail (`harmful_comply_audit.csv`)
-- [x] Evidence that English-only testing reports 0% ASR while Indic registers produce confirmed harmful compliance on identical underlying intents
-
----
-
-## 8. Future Work
-
-1. Expand to 60+ seeds per language with native-speaker review of Marathi, Gujarati, and Kannada variants.
+1. Expand to 60+ seeds per language with independent multi-annotator native-speaker review of Marathi, Gujarati, and Kannada variants.
 2. Evaluate Indic-native models (Sarvam-2, Krutrim) and open-weight multilingual models (Qwen, Llama).
 3. Test multi-turn escalation and CSRT-style automated code-switch generation on our harm taxonomy.
 4. Investigate whether fine-grained safety classifiers (PolyGuard, CREST) detect register-specific failures that model-level refusal misses.
 5. Partner with AI Safety India or Secure AI Futures Lab for community red-teaming validation.
+
+---
+
+## 8. Conclusion
+
+English-only safety evaluation is a poor proxy for how LLMs behave in India's real linguistic registers. Testing 24 Hindi and Marathi harm scenarios across English, monolingual Devanagari, code-switched, and Romanized variants on three OpenAI models, we found 0% attack success in English but a confirmed cross-register failure on electoral misinformation: GPT-4o and GPT-4.1-mini refused fabricated "your polling booth has moved" voter-suppression notices in English yet produced them in Marathi. Equally important is a methodological result that emerged from auditing our own numbers — an automated LLM-as-judge over-counted attack success ~3.75× on Indic prompts, misreading fluent caveated and structurally-sanitized output as compliance. The practical takeaways are concrete: organizations deploying LLMs for Indian-language users must red-team in the registers users actually type, and multilingual red-teaming pipelines must pair automated judging with native-speaker human review or risk reporting judge artifacts as safety failures. Our prompt taxonomy and reproducible pipeline are released to support this work.
+
+---
+
+## Code and Data
+
+- **Code repository:** https://github.com/codeprakhar25/indicmixsafe (MIT-licensed pipeline, analysis scripts, and audit trail)
+- **Data:** The 288-row evaluation output and the full 15-row harmful-compliance audit (`results/report_helpers/harmful_comply_audit.csv`) reproduce all reported numbers. Verbatim harmful seed/prompt CSVs and raw model responses are **withheld from the public repository for dual-use reasons** (see `data/README.md`) and are available to organizers and reviewers on request.
 
 ---
 
@@ -293,6 +295,10 @@ Results reproduce from `results/eval_results.csv` (288 rows); analysis outputs i
 ## Appendix B: Figure 1
 
 **Figure 1** (`results/analysis/figure1_judge_vs_audited.png`) contrasts the automated LLM-judge ASR (red) against the author-audited strict ASR (blue) across the four registers, for the two India-specific categories. It visualizes both contributions at once: (i) the English-vs-Indic asymmetry — EN is 0% under both label sets; and (ii) the judge over-count — the caste signal (33.3% MONO under the judge) collapses to 0% under audit, while the electoral-misinformation signal largely survives (8.3–16.7%), isolating the one confirmed cross-register bypass. Generated reproducibly from `eval_results.csv` + `harmful_comply_audit.csv` via `python scripts/make_figure.py`.
+
+## Appendix C: LLM Usage Statement
+
+This project used Anthropic's Claude (via Claude Code) as a development and writing aid. Claude assisted in scaffolding the Python evaluation pipeline, running aggregate analysis, structuring the two-pass validation and the harmful-compliance audit, and drafting this report. The author defined the research question and study design, curated the Hindi and Marathi seed prompts and their four register variants, executed the evaluation against the OpenAI API, and — as a native Hindi and Marathi speaker — independently read and confirmed every audit label that the reported results depend on. All quantitative claims in this report were verified by the author against the released CSV artifacts (`results/eval_results.csv`, `results/analysis/`, `results/report_helpers/harmful_comply_audit.csv`); the figure and tables are generated directly from those files. The GPT-4o-mini LLM-as-judge is itself an object of study here, and its limitations are documented in Sections 4.5 and 6.
 
 ---
 
