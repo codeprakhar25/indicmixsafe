@@ -296,4 +296,4 @@ Results reproduce from `results/eval_results.csv` (288 rows); analysis outputs i
 
 ---
 
-*Report prepared for submission to the Global South AI Safety Hackathon (Apart Research). Replace bracketed author fields before PDF export.*
+*Report prepared for submission to the Global South AI Safety Hackathon (Apart Research), June 2026.*
