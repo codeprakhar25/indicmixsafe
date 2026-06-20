@@ -276,9 +276,11 @@ Yoo, H., et al. (2025). Code-Switching Red-Teaming: LLM Evaluation for Safety an
 
 ## Appendix A: Reproducibility
 
+Code: **https://github.com/codeprakhar25/indicmixsafe**
+
 ```bash
-git clone [your-repo-url]
-cd safety-hackathon
+git clone https://github.com/codeprakhar25/indicmixsafe
+cd indicmixsafe
 pip install -r requirements.txt
 cp .env.example .env  # add OPENAI_API_KEY
 python src/build_prompts.py
@@ -286,7 +288,7 @@ python src/run_eval.py
 python src/analyze.py
 ```
 
-Results reproduce from `results/eval_results.csv` (288 rows). Analysis outputs in `results/analysis/`.
+Results reproduce from `results/eval_results.csv` (288 rows); analysis outputs in `results/analysis/`. The verbatim harmful seed/prompt CSVs and raw model responses are withheld from the public repository for dual-use reasons (see `data/README.md`) and are available to reviewers on request.
 
 ## Appendix B: Figure 1
 
