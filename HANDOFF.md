@@ -38,7 +38,7 @@ This repository contains everything built during the June 19–21, 2026 hackatho
 
 **Headline results (post-audit, June 19 honesty pass):**
 - 0% attack success on English prompts (holds under all labels)
-- 6.2% automated-judge ASR on Indic registers → **1.7% after author audit** (judge over-counts ~3.75×; 4/15 COMPLY confirmed)
+- 6.2% automated-judge ASR mean across registers (8.3% Indic, 0% English) → **1.7% after author audit** (judge over-counts ~3.75×; 4/15 COMPLY confirmed)
 - Confirmed cross-register bypass = **electoral misinformation only**: EN refuses fake "polling booth moved" voter-suppression notices, Marathi MONO/CS/ROM comply (GPT-4o, GPT-4.1-mini)
 - 18.3% register inconsistency; 3.3% hard drift
 - Caste 33.3% (judge) **downgraded to ~0% on audit** — caveated explanations + sanitized rejection emails, not real bypass

@@ -1,5 +1,7 @@
 # 05 — Results Synthesis (Complete)
 
+> **⚠️ SUPERSEDED by the author audit.** This synthesis reflects the initial automated-judge pass. Key corrections in the final report: the caste 33.3% headline did not survive audit (→ ~0%); the confirmed cross-register failure is electoral misinformation only; "6.2%" is the mean ASR across all four registers (8.3% Indic-only), and Table-1 per-model ASR was corrected for a benign-diluted denominator. **Authoritative numbers: `docs/IndicMixSafe_report.md` + `results/analysis/corrected_metrics.json`.**
+
 All experimental findings, case studies, and report artifacts in one place.
 
 ---

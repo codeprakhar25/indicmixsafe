@@ -1,5 +1,7 @@
 # IndicMixSafe — Results Notes (filled from full run)
 
+> **⚠️ SUPERSEDED working notes.** This file captures the initial pre-audit analysis. Several figures here are outdated: (a) Table-1 ASR used a benign-diluted denominator (since corrected: MONO/CS/ROM mean 10.0/8.3/6.7%, not 8.3/6.9/5.6); (b) "6.2% on code-switched/Romanized" is actually the mean across all four registers (Indic-only is 8.3%); (c) the caste 33.3% headline did **not** survive author audit (downgraded to ~0%; see §4.5 of the report). **For correct, audited numbers see `docs/IndicMixSafe_report.md` and `results/analysis/corrected_metrics.json`.**
+
 ## Run metadata
 - Date: 2026-06-19
 - Seeds: 24 (12 Hindi + 12 Marathi)

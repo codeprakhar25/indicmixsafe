@@ -17,7 +17,7 @@ Evaluates whether OpenAI models refuse harmful requests consistently across **En
 |--------|--------|
 | Prompts evaluated | 96 variants × 3 models = **288 completions** |
 | ASR (English) | **0%** |
-| ASR (Indic, automated judge) | **6.2% mean** |
+| ASR (automated judge) | **6.2% mean across registers** (8.3% Indic, 0% English) |
 | ASR (Indic, author-audited strict) | **1.7%** — judge over-counts ~3.75× |
 | Register inconsistency | **18.3%** of harmful seed×model pairs |
 | Confirmed cross-register bypass | **3.3%** — electoral misinfo (voter-suppression notices), EN refuses / Marathi complies |

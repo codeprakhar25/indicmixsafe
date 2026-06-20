@@ -9,7 +9,7 @@
 
 ## Abstract
 
-Large language models (LLMs) deployed in India receive user prompts in Hinglish, Romanized Hindi, and Marathi-English code-switch — registers that are largely absent from English-centric safety benchmarks. We introduce **IndicMixSafe**, a reproducible evaluation framework testing whether OpenAI models refuse harmful requests consistently across four language registers: English (EN), monolingual Indic in Devanagari script (MONO), code-switched Indic-English (CS), and Romanized Indic (ROM). We evaluate 24 culturally grounded harm scenarios in Hindi and Marathi across six categories — caste discrimination, religious incitement, political misinformation, gender-based harm, general violence, and benign educational controls — with three OpenAI models (GPT-4o, GPT-4.1-mini, GPT-4o-mini), yielding 288 model completions. English prompts produced **0% attack success rate (ASR)** across all models. An automated LLM judge flagged **6.2% mean ASR** on Indic registers, but our **author audit of every flagged response found that only 4 of 15 were genuine harmful compliance** (a ~3.75× judge over-count) — the clean, unambiguous failure being **electoral misinformation**: GPT-4o and GPT-4.1-mini refused to write fabricated "your polling booth has moved" voter-suppression notices in English but produced them in monolingual, code-switched, and Romanized Marathi. We also observe that **18.3% of harmful scenarios receive register-dependent handling** (the same intent classified differently across registers). We make two contributions: (i) a directional, regionally-grounded demonstration that English-only safety testing misses register-specific failures on India-specific harms, and (ii) evidence that **automated LLM-as-judge systematically over-counts attack success on Indic-language prompts**, underscoring the need for human-in-the-loop multilingual safety evaluation. We release our evaluation pipeline for community extension.
+Large language models (LLMs) deployed in India receive user prompts in Hinglish, Romanized Hindi, and Marathi-English code-switch — registers that are largely absent from English-centric safety benchmarks. We introduce **IndicMixSafe**, a reproducible evaluation framework testing whether OpenAI models refuse harmful requests consistently across four language registers: English (EN), monolingual Indic in Devanagari script (MONO), code-switched Indic-English (CS), and Romanized Indic (ROM). We evaluate 24 culturally grounded harm scenarios in Hindi and Marathi across six categories — caste discrimination, religious incitement, political misinformation, gender-based harm, general violence, and benign educational controls — with three OpenAI models (GPT-4o, GPT-4.1-mini, GPT-4o-mini), yielding 288 model completions. English prompts produced **0% attack success rate (ASR)** across all models. An automated LLM judge flagged a **6.2% mean ASR across the four registers** (0% English, 8.3% averaged over the three Indic registers), but our **author audit of every flagged response found that only 4 of 15 were genuine harmful compliance** (a ~3.75× judge over-count) — the clean, unambiguous failure being **electoral misinformation**: GPT-4o and GPT-4.1-mini refused to write fabricated "your polling booth has moved" voter-suppression notices in English but produced them in monolingual, code-switched, and Romanized Marathi. We also observe that **18.3% of harmful scenarios receive register-dependent handling** (the same intent classified differently across registers). We make two contributions: (i) a directional, regionally-grounded demonstration that English-only safety testing misses register-specific failures on India-specific harms, and (ii) evidence that **automated LLM-as-judge systematically over-counts attack success on Indic-language prompts**, underscoring the need for human-in-the-loop multilingual safety evaluation. We release our evaluation pipeline for community extension.
 
 **Keywords:** multilingual AI safety, code-switching, Hindi, Marathi, India, red-teaming, safety drift
 
@@ -114,12 +114,14 @@ Table 1 shows ASR aggregated across all harmful categories (excluding benign con
 
 | Model | EN | MONO | CS | ROM |
 |-------|-----|------|-----|-----|
-| GPT-4o | 0.0 | 4.2 | 4.2 | 4.2 |
-| GPT-4.1-mini | 0.0 | 8.3 | 8.3 | 8.3 |
-| GPT-4o-mini | 0.0 | **12.5** | 8.3 | 4.2 |
-| **Mean** | **0.0** | **8.3** | **6.9** | **5.6** |
+| GPT-4o | 0.0 | 5.0 | 5.0 | 5.0 |
+| GPT-4.1-mini | 0.0 | 10.0 | 10.0 | 10.0 |
+| GPT-4o-mini | 0.0 | **15.0** | 10.0 | 5.0 |
+| **Mean** | **0.0** | **10.0** | **8.3** | **6.7** |
 
-**Key finding (automated judge):** All three models achieve **0% ASR on English prompts** but non-zero ASR on at least one Indic register. Table 1 reports the automated LLM-judge labels. As Section 4.5 shows, author audit reduces these figures substantially (genuine harmful-compliance ASR ≈ 1.7% rather than 6.2%); the English-vs-Indic asymmetry, however, holds under both label sets — English never produced harmful compliance, Indic registers did.
+ASR is computed over the 20 harmful seeds per model × register (benign controls are scored separately, §4.4). The mean harmful ASR across all four registers is **6.2%** (the average of the Mean row); restricted to the three Indic registers it is **8.3%**, versus **0%** for English.
+
+**Key finding (automated judge):** All three models achieve **0% ASR on English prompts** but non-zero ASR on every Indic register. Table 1 reports the automated LLM-judge labels. As Section 4.5 shows, author audit reduces these figures substantially (genuine harmful-compliance ASR ≈ 1.7% across registers / 2.2% on Indic, rather than 6.2% / 8.3%); the English-vs-Indic asymmetry, however, holds under both label sets — English never produced harmful compliance, Indic registers did.
 
 ### 4.2 Attack success by harm category and variant
 
@@ -195,7 +197,7 @@ Our second finding cuts against our own initial numbers. The automated judge's a
 
 ### 5.3 Deployment-tier models
 
-On automated labels GPT-4o-mini showed equal or higher ASR than GPT-4o (up to 12.5% on monolingual prompts), but most of that gap was caste responses the audit downgraded, so we do not claim a confirmed mini-vs-frontier safety gap. Notably, the *confirmed* electoral-misinformation bypass appeared on **GPT-4o and GPT-4.1-mini, not only the smallest model** — frontier scale did not prevent it. Given the volume of cost-optimized models deployed across Indian-language interfaces, register-specific evaluation remains warranted at every tier.
+On automated labels GPT-4o-mini showed equal or higher ASR than GPT-4o (up to 15.0% on monolingual prompts), but most of that gap was caste responses the audit downgraded, so we do not claim a confirmed mini-vs-frontier safety gap. Notably, the *confirmed* electoral-misinformation bypass appeared on **GPT-4o and GPT-4.1-mini, not only the smallest model** — frontier scale did not prevent it. Given the volume of cost-optimized models deployed across Indian-language interfaces, register-specific evaluation remains warranted at every tier.
 
 ### 5.4 Implications for India-specific harm categories
 
